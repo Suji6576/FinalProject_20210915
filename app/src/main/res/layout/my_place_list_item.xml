@@ -35,6 +35,6 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/yellow_marker"
-        android:padding="10dp"/>
+        android:padding="5dp"/>
 
 </LinearLayout>

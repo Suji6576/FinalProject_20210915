@@ -39,7 +39,7 @@
                 android:id="@+id/placeNameTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="학원 앞" />
+                android:text="약속장소" />
 
         </LinearLayout>
 
