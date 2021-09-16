@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
@@ -208,6 +209,29 @@ class MySettingActivity : BaseActivity() {
         Glide.with(mContext).load(GlobalData.loginUser!!.profileImgUrl).into(binding.profileImg)
 
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+//        갤러리에서 사진 가져온 경우?
+        if (requestCode == REQ_FOR_GALLERY) {
+
+//            실제로 이미지를 선택한건지?
+            if(resultCode== RESULT_OK){
+                Log.d("프사선택","실제로 선택까지 완료")
+
+//                실제로 담아준 intent가 있는지? => data가 null이 아닌지?
+
+                data?.let {
+                    Log.d("돌려준사진", it.toString())
+                }
+            }
+            else{
+                Log.d("프사선택","선택까지는 하지않음.(취소)")
+            }
+
+        }
     }
 
 }
