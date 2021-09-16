@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.neppplus.finalproject_20210915.R
 import com.neppplus.finalproject_20210915.adapters.MyFriendsRecyclerAdapter
 import com.neppplus.finalproject_20210915.databinding.FragmentMyFriendsListBinding
@@ -46,6 +47,8 @@ class MyFriendsListFragment : BaseFragment() {
 
         mFriendAdapter = MyFriendsRecyclerAdapter(mContext, mFriendsList)
         binding.myFriendsRecyclerView.adapter = mFriendAdapter
+
+        binding.myFriendsRecyclerView.layoutManager = LinearLayoutManager(mContext)
 
     }
 
