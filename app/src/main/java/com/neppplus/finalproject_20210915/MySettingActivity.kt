@@ -47,6 +47,11 @@ class MySettingActivity : BaseActivity() {
 //        안드로이드가 제공하는 갤러리 화면 활용 .Intent(4) 추가항목
 //        어떤사진? 결과를 얻기 위해 화면이동. Intent(3) 활용
 
+        binding.myFriendsLayout.setOnClickListener {
+            val myIntent = Intent(mContext, ViewMyFriendsListActivity::class.java)
+            startActivity(myIntent)
+        }
+
         binding.profileImg.setOnClickListener {
 
 //            갤러리를 개발자가 이용하겠다 => 허락을 받아야 볼 수 있다. => 권한세팅필요
