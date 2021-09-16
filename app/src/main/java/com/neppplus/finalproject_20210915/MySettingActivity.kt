@@ -16,6 +16,7 @@ import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
 import com.neppplus.finalproject_20210915.databinding.ActivityMySettingBinding
 import com.neppplus.finalproject_20210915.datas.BasicResponse
+import com.neppplus.finalproject_20210915.utils.ContextUtil
 import com.neppplus.finalproject_20210915.utils.GlobalData
 import com.neppplus.finalproject_20210915.utils.URIPathHelper
 import okhttp3.MediaType
@@ -78,7 +79,26 @@ class MySettingActivity : BaseActivity() {
 
         }
 
-       binding.myPlacesLayout.setOnClickListener {
+        binding.logoutLayout.setOnClickListener {
+
+            val alert = AlertDialog.Builder(mContext)
+            alert.setTitle("로그아웃")
+            alert.setMessage("정말 로그아웃 하시겠습니까?")
+            alert.setPositiveButton("확인", DialogInterface.OnClickListener { dialogInterface, i ->
+                ContextUtil.setToken(mContext,"")
+                GlobalData.loginUser = null
+
+                val myIntent = Intent(mContext, SplashActivity::class.java)
+//                플래그 활용해서 다른 모든 화면 제거.
+                myIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(myIntent)
+            })
+            alert.setNegativeButton("취소", null)
+            alert.show()
+
+        }
+
+        binding.myPlacesLayout.setOnClickListener {
             val myIntent = Intent(mContext, ViewMyPlaceListActivity::class.java)
             startActivity(myIntent)
         }
