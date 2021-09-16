@@ -7,6 +7,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".ViewMyFriendsListActivity">
         
         <com.google.android.material.tabs.TabLayout
@@ -15,8 +16,8 @@
             android:id="@+id/friendsTapLayout"/>
         
         <androidx.viewpager.widget.ViewPager
-            android:layout_width=""
-            android:layout_height=""
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
