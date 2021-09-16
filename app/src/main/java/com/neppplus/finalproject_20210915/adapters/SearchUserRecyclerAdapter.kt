@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.neppplus.finalproject_20210915.R
 import com.neppplus.finalproject_20210915.datas.UserData
 
@@ -19,6 +20,25 @@ class SearchUserRecyclerAdapter(
         val nicknameTxt = view.findViewById<TextView>(R.id.nicknameTxt)
         val socialLoginImg = view.findViewById<ImageView>(R.id.socialLoginImg)
 
+        fun bind(context: Context, data:UserData) {
+            Glide.with(context).load(data.profileImgURL).into(profileImg)
+            nicknameTxt.text = data.nickName
+            when(data.provider) {
+
+                "facebook" -> {
+                    socialLoginImg.setImageResource(R.drawable.facebook_login_icon)
+                    socialLoginImg.visibility = View.VISIBLE
+                }
+                "kakao" -> {
+                    socialLoginImg.setImageResource(R.drawable.kakao_login_icon)
+                    socialLoginImg.visibility = View.VISIBLE
+                }
+                else -> {
+                    socialLoginImg.visibility = View.GONE
+                }
+            }
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -27,6 +47,9 @@ class SearchUserRecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
+
+        val data = mList[position]
+        holder.bind(mContext, data)
 
     }
 
