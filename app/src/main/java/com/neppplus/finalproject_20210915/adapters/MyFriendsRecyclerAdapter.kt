@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.neppplus.finalproject_20210915.R
@@ -14,21 +13,21 @@ import com.neppplus.finalproject_20210915.datas.UserData
 
 class MyFriendsRecyclerAdapter(
     val mContext: Context,
-    val mList: List<UserData>): RecyclerView.Adapter<MyFriendsRecyclerAdapter.FriendViewHolder> () {
+    val mList: List<UserData>) : RecyclerView.Adapter<MyFriendsRecyclerAdapter.FriendViewHolder>() {
 
-
-    class FriendViewHolder(view: View) : RecyclerView.ViewHolder(view){
+    class FriendViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val friendProfileImg = view.findViewById<ImageView>(R.id.friendProfileImg)
         val nicknameTxt = view.findViewById<TextView>(R.id.nicknameTxt)
         val socialLoginImg = view.findViewById<ImageView>(R.id.socialLoginImg)
 
-        fun bind(context: Context ,data: UserData){
+        fun bind(context: Context, data:  UserData) {
+
             nicknameTxt.text = data.nickName
 
-            Glide.with(context).load(data.profileImgUrl).into(friendProfileImg)
+            Glide.with(context).load(data.profileImgURL).into(friendProfileImg)
 
-            when(data.provider){
-                "facecook" -> {
+            when (data.provider) {
+                "facebook" -> {
                     socialLoginImg.setImageResource(R.drawable.facebook_login_icon)
                     socialLoginImg.visibility = View.VISIBLE
                 }
@@ -52,10 +51,14 @@ class MyFriendsRecyclerAdapter(
     override fun onBindViewHolder(holder: FriendViewHolder, position: Int) {
 
         val data = mList[position]
-        holder.bind(mContext,data)
+        holder.bind(mContext, data)
 
     }
 
-    override fun getItemCount() = mList.size
+    override fun getItemCount(): Int {
+
+        return mList.size
+
+    }
 
 }

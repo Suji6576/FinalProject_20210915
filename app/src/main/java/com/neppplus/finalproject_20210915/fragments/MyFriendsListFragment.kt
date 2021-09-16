@@ -19,7 +19,8 @@ import retrofit2.Response
 class MyFriendsListFragment : BaseFragment() {
 
     lateinit var binding: FragmentMyFriendsListBinding
-    val mFriendsList = ArrayList<UserData>()
+
+    val mMyFriendsList = ArrayList<UserData>()
     lateinit var mFriendAdapter: MyFriendsRecyclerAdapter
 
     override fun onCreateView(
@@ -28,7 +29,7 @@ class MyFriendsListFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_friends_list, container, false)
-        return binding.root
+        return  binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -39,13 +40,11 @@ class MyFriendsListFragment : BaseFragment() {
 
     override fun setUpEvents() {
 
-
-
     }
 
     override fun setValues() {
 
-        mFriendAdapter = MyFriendsRecyclerAdapter(mContext, mFriendsList)
+        mFriendAdapter = MyFriendsRecyclerAdapter(mContext, mMyFriendsList)
         binding.myFriendsRecyclerView.adapter = mFriendAdapter
 
         binding.myFriendsRecyclerView.layoutManager = LinearLayoutManager(mContext)
@@ -62,15 +61,13 @@ class MyFriendsListFragment : BaseFragment() {
         apiService.getRequestFriendList("my").enqueue(object : Callback<BasicResponse> {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
 
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
 
-                    val BasicResponse = response.body()!!
+                    val basicResponse = response.body()!!
 
-                    mFriendsList.clear()
-
-                    mFriendsList.addAll(BasicResponse.data.friends)
+                    mMyFriendsList.clear()
+                    mMyFriendsList.addAll(basicResponse.data.friends)
                     mFriendAdapter.notifyDataSetChanged()
-
                 }
 
             }

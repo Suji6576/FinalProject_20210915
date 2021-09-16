@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
@@ -236,7 +235,7 @@ class MySettingActivity : BaseActivity() {
 
 //        로그인한 사용자는 프로필사진경로 (URL -String)도 들고있다. => profileImg에 적용.(Glide)
 
-        Glide.with(mContext).load(GlobalData.loginUser!!.profileImgUrl).into(binding.profileImg)
+        Glide.with(mContext).load(GlobalData.loginUser!!.profileImgURL).into(binding.profileImg)
 
 
     }

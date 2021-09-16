@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.neppplus.finalproject_20210915.R
-import com.neppplus.finalproject_20210915.databinding.FragmentMyFriendsListBinding
+import com.neppplus.finalproject_20210915.databinding.FragmentRequestedUserListBinding
 
 class RequestedUserListFragment : BaseFragment() {
 
-    lateinit var binding : FragmentMyFriendsListBinding
+    lateinit var binding:  FragmentRequestedUserListBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
