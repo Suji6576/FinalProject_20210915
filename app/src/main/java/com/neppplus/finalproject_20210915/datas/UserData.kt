@@ -9,7 +9,7 @@ class UserData(
     @SerializedName("nick_name")
     var nickName: String,
     var email: String,
-    @SerializedName("profileImg")
+    @SerializedName("profile_img")
     var profileImgURL: String,
     @SerializedName("ready_minute")
     var readyMinute: Int) : Serializable {

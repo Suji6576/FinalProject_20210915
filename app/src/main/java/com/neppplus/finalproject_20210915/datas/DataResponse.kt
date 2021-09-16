@@ -13,5 +13,6 @@ class DataResponse(
 //    검색된 사용자 목록
     var users: List<UserData>,
 
+
     ) {
 }

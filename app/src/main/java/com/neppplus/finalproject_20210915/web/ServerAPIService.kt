@@ -86,6 +86,9 @@ interface ServerAPIService {
     @GET("/user/friend")
     fun getRequestSearchUser(@Query("nickname") keyword: String) : Call<BasicResponse>
 
+    @POST("/user/friend")
+    fun postRequestAddFriend(@Field("user_id") userId: Int ) : Call<BasicResponse>
+
 
 
 }
