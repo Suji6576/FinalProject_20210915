@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.Glide
 import com.neppplus.finalproject_20210915.databinding.ActivityMySettingBinding
 import com.neppplus.finalproject_20210915.datas.BasicResponse
 import com.neppplus.finalproject_20210915.utils.GlobalData
@@ -28,7 +29,15 @@ class MySettingActivity : BaseActivity() {
 
     override fun setupEvents() {
 
-        binding.myPlacesLayout.setOnClickListener { 
+//        프로필 사진 누르면 => 프사변경의 의미로 사용 => 갤러리 프사 선택하러 진입
+//        안드로이드가 제공하는 갤러리 화면 활용 .Intent(4) 추가항목
+//        어떤사진? 결과를 얻기 위해 화면이동. Intent(3) 활용
+
+        binding.profileImg.setOnClickListener {
+
+        }
+
+       binding.myPlacesLayout.setOnClickListener {
             val myIntent = Intent(mContext, ViewMyPlaceListActivity::class.java)
             startActivity(myIntent)
         }
@@ -158,6 +167,10 @@ class MySettingActivity : BaseActivity() {
             "default" -> binding.passwordLayout.visibility = View.VISIBLE
             else -> binding.passwordLayout.visibility = View.GONE
         }
+
+//        로그인한 사용자는 프로필사진경로 (URL -String)도 들고있다. => profileImg에 적용.(Glide)
+
+        Glide.with(mContext).load(GlobalData.loginUser!!.profileImgUrl).into(binding.profileImg)
 
 
     }
