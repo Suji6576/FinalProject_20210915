@@ -62,9 +62,10 @@ class MySettingActivity : BaseActivity() {
 //                    갤러리로 사진 가지러 이동. (추가작업)
 
                     val myIntent = Intent()
-                    myIntent.action = Intent.ACTION_GET_CONTENT
+                    myIntent.action = Intent.ACTION_PICK
                     myIntent.type = "image/*"
-                    startActivityForResult(Intent.createChooser(myIntent,"프로필사진 선택하기"), REQ_FOR_GALLERY)
+                    myIntent.type = android.provider.MediaStore.Images.Media.CONTENT_TYPE
+                    startActivityForResult(myIntent, REQ_FOR_GALLERY)
                 }
 
                 override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
