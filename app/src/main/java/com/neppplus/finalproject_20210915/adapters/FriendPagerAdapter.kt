@@ -9,6 +9,13 @@ import com.neppplus.finalproject_20210915.fragments.RequestedUserListFragment
 class FriendPagerAdapter (fm: FragmentManager): FragmentPagerAdapter(fm) {
     override fun getCount() = 2
 
+    override fun getPageTitle(position: Int): CharSequence? {
+        return when(position) {
+            0 -> "내 친구목록"
+            else -> "친구추가요청"
+        }
+    }
+
     override fun getItem(position: Int): Fragment {
         return when(position) {
             0 -> MyFriendsListFragment()
