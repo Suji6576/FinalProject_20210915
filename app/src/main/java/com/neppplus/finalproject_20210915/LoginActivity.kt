@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 
 import android.util.Base64
 import android.util.Log
+import android.view.View
 import java.security.MessageDigest
 
 import com.facebook.login.LoginResult
@@ -269,6 +270,10 @@ class LoginActivity : BaseActivity() {
     }
 
     override fun setValues() {
+
+//        제목 문구 숨김, 회사 로고 보여주기
+        titleTxt.visibility = View.GONE
+        companyLogoImg.visibility = View.VISIBLE
 
 //        카톡으로 받은 코드 복붙 => 키 해시값 추출
         val info = packageManager.getPackageInfo(
