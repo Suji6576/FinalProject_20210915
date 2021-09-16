@@ -17,9 +17,14 @@ import com.gun0912.tedpermission.normal.TedPermission
 import com.neppplus.finalproject_20210915.databinding.ActivityMySettingBinding
 import com.neppplus.finalproject_20210915.datas.BasicResponse
 import com.neppplus.finalproject_20210915.utils.GlobalData
+import com.neppplus.finalproject_20210915.utils.URIPathHelper
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 
 class MySettingActivity : BaseActivity() {
 
@@ -233,6 +238,26 @@ class MySettingActivity : BaseActivity() {
 //                API서버에 사진을 전송. => PUT - /user/image 로 API 활용.
 //                파일을 같이 첨부해야한다. => Multipart 형식의 데이터 첨부 활용. (기존 FormData와는 다르다!)
 
+//                Uri -> File형태로 변환 -> 그 파일의 실제 경로? 얻어낼 필요가 있다.
+
+                val file = File( URIPathHelper().getPath(mContext, dataUri!!) )
+
+//                파일을 Retrofit에 첨부할 수 있는 => RequestBody => Multipartbody 형태로 변환
+                val fileReqBody = RequestBody.create(MediaType.get("image/*"), file)
+                val body = MultipartBody.Part.createFormData("profile_image","myFile.jpg", fileReqBody)
+
+                apiService.putRequestProfileImage(body).enqueue(object : Callback<BasicResponse>{
+                    override fun onResponse(
+                        call: Call<BasicResponse>,
+                        response: Response<BasicResponse>
+                    ) {
+
+                    }
+
+                    override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                    }
+                })
 
             }
 
