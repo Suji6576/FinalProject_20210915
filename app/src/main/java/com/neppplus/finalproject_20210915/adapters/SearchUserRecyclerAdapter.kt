@@ -8,17 +8,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.neppplus.finalproject_20210915.AddFriendActivity
 import com.neppplus.finalproject_20210915.R
-import com.neppplus.finalproject_20210915.datas.BasicResponse
 import com.neppplus.finalproject_20210915.datas.UserData
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class SearchUserRecyclerAdapter(
     val mContext: Context,
@@ -29,7 +23,7 @@ class SearchUserRecyclerAdapter(
         val profileImg = view.findViewById<ImageView>(R.id.profileImg)
         val nicknameTxt = view.findViewById<TextView>(R.id.nicknameTxt)
         val socialLoginImg = view.findViewById<ImageView>(R.id.socialLoginImg)
-        val addFriendBtn = view.findViewById<Button>(R.id.addFriendBtn)
+        val addFriendBtn = view.findViewById<Button>(R.id.acceptBtn)
 
         fun bind(context: Context, data: UserData) {
             Glide.with(context).load(data.profileImgURL).into(profileImg)

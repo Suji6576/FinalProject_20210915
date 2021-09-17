@@ -36,13 +36,13 @@
         android:layout_weight="1"/>
 
     <Button
-        android:id="@+id/addFriendBtn"
+        android:id="@+id/acceptBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="친구추가"/>
+        android:text="수락"/>
 
     <Button
-        android:id="@+id/refuseFriendBtn"
+        android:id="@+id/refuseBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
