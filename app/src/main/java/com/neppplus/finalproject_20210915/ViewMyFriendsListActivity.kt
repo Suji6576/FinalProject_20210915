@@ -3,6 +3,7 @@ package com.neppplus.finalproject_20210915
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.viewpager.widget.ViewPager
@@ -10,6 +11,8 @@ import com.google.android.material.tabs.TabLayout
 import com.neppplus.finalproject_20210915.adapters.FriendPagerAdapter
 import com.neppplus.finalproject_20210915.databinding.ActivityViewMyFriendsListBinding
 import com.neppplus.finalproject_20210915.datas.BasicResponse
+import com.neppplus.finalproject_20210915.fragments.MyFriendsListFragment
+import com.neppplus.finalproject_20210915.fragments.RequestedUserListFragment
 
 class ViewMyFriendsListActivity : BaseActivity() {
 
@@ -26,9 +29,37 @@ class ViewMyFriendsListActivity : BaseActivity() {
 
     override fun setupEvents() {
 
-//        binding.friendsViewPager.addOnAdapterChangeListener(object : TabLayout.ViewPagerOnTabSelectedListener {
-//
-//        })
+        binding.friendsViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+//                Log.d("오프셋값", positionOffset.toString())
+
+            }
+
+            override fun onPageSelected(position: Int) {
+                Log.d("선택된페이지", position.toString())
+//                각 페이지에 맞는 프래그먼트의 새로고침 실행.
+
+                when (position) {
+                    0 -> {
+                        (mFPA.getItem(position) as MyFriendsListFragment).getMyFriendsListFromServer()
+                    }
+                    else -> {
+                        (mFPA.getItem(position) as RequestedUserListFragment).getRequestUserListFromServer()
+                    }
+
+                }
+
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+
+            }
+
+        })
 
         addBtn.setOnClickListener {
             val myIntent = Intent(mContext, AddFriendActivity::class.java)
