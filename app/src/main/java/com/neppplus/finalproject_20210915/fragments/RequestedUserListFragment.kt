@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.neppplus.finalproject_20210915.R
 import com.neppplus.finalproject_20210915.adapters.MyFriendsRecyclerAdapter
+import com.neppplus.finalproject_20210915.adapters.RequestUserRecyclerAdapter
 import com.neppplus.finalproject_20210915.databinding.FragmentRequestedUserListBinding
 import com.neppplus.finalproject_20210915.datas.BasicResponse
 import com.neppplus.finalproject_20210915.datas.UserData
@@ -21,7 +22,7 @@ class RequestedUserListFragment : BaseFragment() {
     lateinit var binding:  FragmentRequestedUserListBinding
 
     val mReqUserList = ArrayList<UserData>()
-    lateinit var mReqUserAdapter: MyFriendsRecyclerAdapter
+    lateinit var mReqUserAdapter: RequestUserRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,10 +47,10 @@ class RequestedUserListFragment : BaseFragment() {
 
     override fun setValues() {
 
-        mReqUserAdapter = MyFriendsRecyclerAdapter(mContext, mReqUserList)
-        binding.ReqUserRecyclerView.adapter = mReqUserAdapter
+        mReqUserAdapter = RequestUserRecyclerAdapter(mContext, mReqUserList)
+        binding.requestUserRecyclerView.adapter = mReqUserAdapter
 
-        binding.ReqUserRecyclerView.layoutManager = LinearLayoutManager(mContext)
+        binding.requestUserRecyclerView.layoutManager = LinearLayoutManager(mContext)
 
     }
 
@@ -64,7 +65,6 @@ class RequestedUserListFragment : BaseFragment() {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
 
                 if (response.isSuccessful) {
-
                     val basicResponse = response.body()!!
 
                     mReqUserList.clear()
