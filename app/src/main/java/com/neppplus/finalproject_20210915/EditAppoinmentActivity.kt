@@ -100,7 +100,11 @@ class EditAppoinmentActivity : BaseActivity() {
 
             val textView = TextView(mContext)
             textView.setBackgroundResource(R.drawable.selected_friend_box)
-            textView.setPadding( SizeUtil.dpToBox(mContext, 5f).toInt())
+
+            textView.setPadding( SizeUtil.dpToPx(mContext, 5f).toInt() )
+
+//            구글링 - marginRight 설정하기. => SizeUtil을 이용해서 설정.
+
             textView.text = selectedFriend.nickName
 
 //            만들어낸 텍스트뷰에 이벤트처리.
