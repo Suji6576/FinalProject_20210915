@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.core.view.setPadding
 import androidx.databinding.DataBindingUtil
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
@@ -55,7 +56,6 @@ class EditAppoinmentActivity : BaseActivity() {
 
 //    약속에 참가시킬 친구 리스트.
     val mSelectedFriendsList = ArrayList<UserData>()
-
 //    선택된 출발지를 담아줄 변수.
     lateinit var mSelectedStartPlace: PlaceData
 
@@ -461,8 +461,8 @@ class EditAppoinmentActivity : BaseActivity() {
             mSelectedLng.toString(),
             mSelectedLat.toString(),
             null,
-        null,
-        null,
+            null,
+            null,
             object : OnResultCallbackListener {
                 override fun onSuccess(p0: ODsayData?, p1: API?) {
 
