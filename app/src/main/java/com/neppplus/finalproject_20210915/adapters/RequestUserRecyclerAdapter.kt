@@ -10,10 +10,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.neppplus.finalproject_20210915.R
+import com.neppplus.finalproject_20210915.datas.BasicResponse
 import com.neppplus.finalproject_20210915.datas.UserData
+import com.neppplus.finalproject_20210915.web.ServerAPI
+import com.neppplus.finalproject_20210915.web.ServerAPIService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.create
 
 class RequestUserRecyclerAdapter (
     val mContext: Context,
@@ -43,6 +47,40 @@ class RequestUserRecyclerAdapter (
                         socialLoginImg.visibility = View.GONE
                     }
                 }
+
+//                 수락/거절버튼 둘 다 하는 일은 동일. type에 첨부할 값만 다르다.
+//                버튼에 미리 태그를 달아두고 => 꺼내서 쓰는 동일한 작업.
+
+                val sendOkOrNoToSever = object : View.OnClickListener {
+                    override fun onClick(p0: View?) {
+
+                        val okOrNo = p0!!.tag.toString()
+
+//                        어댑터에서 API서비스 사용법.
+//                        (1) 직접 만들자(!)
+//                        (2) 화면 (context)의 변수를 활용. => 액티비티의 어댑터에서 활용 편함.
+
+                        val apiService = ServerAPI.getRetrofit(context).create(ServerAPIService::class.java)
+
+                        apiService.putRequestSendOkOrNoFriend(data.id, okOrNo).enqueue(object : Callback<BasicResponse>{
+                            override fun onResponse(
+                                call: Call<BasicResponse>,
+                                response: Response<BasicResponse>
+                            ) {
+
+                            }
+
+                            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                            }
+
+                        })
+
+                    }
+
+                }
+                acceptBtn.setOnClickListener (sendOkOrNoToSever)
+                refuseBtn.setOnClickListener(sendOkOrNoToSever)
 
             }
         }
