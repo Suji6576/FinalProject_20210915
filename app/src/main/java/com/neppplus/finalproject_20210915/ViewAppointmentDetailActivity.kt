@@ -12,6 +12,7 @@ import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.MapFragment
 import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.PathOverlay
 import com.naver.maps.map.util.MarkerIcons
 import com.neppplus.finalproject_20210915.databinding.ActivityViewAppointmentDetailBinding
 import com.neppplus.finalproject_20210915.datas.AppointmentData
@@ -113,6 +114,18 @@ class ViewAppointmentDetailActivity : BaseActivity() {
             startMarker.map = naverMap
 
             //          - 출발지 / 도착지 일직선 PathOverlay 그어주기
+
+            val path = PathOverlay()
+
+            val points = ArrayList<LatLng>()
+            points.add(startLatLng)
+
+//            둘 사이에서 -> 실제 경유지들을 추가.
+
+            points.add(dest)
+
+            path.coords = points
+            path.map = naverMap
 
 
 //          - 대중교통 API 활용 => 1. 도착 예상시간 표시 (infoWindow)
