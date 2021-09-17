@@ -251,6 +251,26 @@ class EditAppoinmentActivity : BaseActivity() {
 
 //            출발지 정보도 같이 첨부.
 
+//            선택한 친구목록? "1,3,5" 가공해서 첨부.
+
+            var friendListStr = ""
+
+//            friendListStr변수에 들어갈 String을 친구 목록을 이용해 가공.
+
+            for (friend in mSelectedFriendsList) {
+                Log.d("친구들", friend.id.toString())
+
+                friendListStr += friend.id
+                friendListStr += ","
+            }
+
+//            마지막의, 제거 => 글자의 길이가 0보다 커야 가능.
+            if (friendListStr != "") {
+                friendListStr = friendListStr.substring(0, friendListStr.length-1)
+            }
+
+            Log.d("첨부할 친구목록", friendListStr)
+
 //            서버에 API 호출
             apiService.postRequestAppointment(
                 inputTitle,
@@ -259,7 +279,8 @@ class EditAppoinmentActivity : BaseActivity() {
                 mSelectedStartPlace.latitude,
                 mSelectedStartPlace.longitude,
                 inputPlaceName,
-                mSelectedLat, mSelectedLng).enqueue(object : Callback<BasicResponse> {
+                mSelectedLat, mSelectedLng,
+                friendListStr).enqueue(object : Callback<BasicResponse> {
                 override fun onResponse(
                     call: Call<BasicResponse>,
                     response: Response<BasicResponse>
