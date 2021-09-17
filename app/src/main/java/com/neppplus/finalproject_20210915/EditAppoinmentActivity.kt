@@ -18,10 +18,12 @@ import com.naver.maps.map.overlay.InfoWindow
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.overlay.PathOverlay
+import com.neppplus.finalproject_20210915.adapters.MyFriendSpinnerAdapter
 import com.neppplus.finalproject_20210915.adapters.StartPlaceSpinnerAdapter
 import com.neppplus.finalproject_20210915.databinding.ActivityEditAppoinmentBinding
 import com.neppplus.finalproject_20210915.datas.BasicResponse
 import com.neppplus.finalproject_20210915.datas.PlaceData
+import com.neppplus.finalproject_20210915.datas.UserData
 import com.odsay.odsayandroidsdk.API
 import com.odsay.odsayandroidsdk.ODsayData
 import com.odsay.odsayandroidsdk.ODsayService
@@ -49,6 +51,10 @@ class EditAppoinmentActivity : BaseActivity() {
     val mStartPlaceList = ArrayList<PlaceData>()
     lateinit var mSpinnerAdapter : StartPlaceSpinnerAdapter
 
+//    내 친구목록을 담아둘 리스트.
+    val mMyFriendsList = ArrayList<UserData>()
+    lateinit var mFriendSpinnerAdapter :  MyFriendSpinnerAdapter
+
 //    선택된 출발지를 담아줄 변수.
     lateinit var mSelectedStartPlace: PlaceData
 
@@ -57,7 +63,6 @@ class EditAppoinmentActivity : BaseActivity() {
 
 //    화면에 그려질 출발~도착지 연결 선
     val mPath = PathOverlay()
-
 
 //    선택된 도착지를 보여줄 마커 하나만 생성.
     val selectedPointMarker = Marker()
@@ -257,6 +262,24 @@ class EditAppoinmentActivity : BaseActivity() {
     override fun setValues() {
 
         titleTxt.text = "약속 잡기"
+
+        mFriendSpinnerAdapter = MyFriendSpinnerAdapter(mContext, R.layout.friend_list_item, mMyFriendsList)
+        binding.myFriendsSpinner.adapter = mFriendSpinnerAdapter
+
+//        내 친구목록 담아주기
+        apiService.getRequestFriendList("my").enqueue(object : Callback<BasicResponse>{
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+                if (response.isSuccessful) {
+                    mMyFriendsList.clear()
+                    mMyFriendsList.addAll(response.body()!!.data.friends)
+                    mFriendSpinnerAdapter.notifyDataSetChanged()
+                }
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+            }
+
+        })
 
         mSpinnerAdapter = StartPlaceSpinnerAdapter(mContext, R.layout.my_place_list_item, mStartPlaceList)
         binding.startPlaceSpinner.adapter = mSpinnerAdapter
