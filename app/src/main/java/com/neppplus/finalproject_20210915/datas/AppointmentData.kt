@@ -6,7 +6,8 @@ import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AppointmentData(
+class
+AppointmentData(
     var id: Int,
     @SerializedName("user_id")
     var userId: Int,
