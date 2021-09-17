@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.neppplus.finalproject_20210915.R
 import com.neppplus.finalproject_20210915.datas.UserData
 import retrofit2.Call
@@ -26,6 +27,22 @@ class RequestUserRecyclerAdapter (
             val refuseBtn = view.findViewById<Button>(R.id.refuseBtn)
 
             fun bind(context: Context, data: UserData) {
+
+                Glide.with(context).load(data.profileImgURL).into(profileImg)
+                nicknameTxt.text = data.nickName
+                when ( data.provider ) {
+                    "facebook" -> {
+                        socialLoginImg.visibility = View.VISIBLE
+                        socialLoginImg.setImageResource(R.drawable.facebook_login_icon)
+                    }
+                    "kakao" -> {
+                        socialLoginImg.visibility = View.VISIBLE
+                        socialLoginImg.setImageResource(R.drawable.kakao_login_icon)
+                    }
+                    else -> {
+                        socialLoginImg.visibility = View.GONE
+                    }
+                }
 
             }
         }
