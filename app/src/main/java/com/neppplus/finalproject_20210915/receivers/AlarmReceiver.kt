@@ -46,12 +46,12 @@ class AlarmReceiver : BroadcastReceiver() {
 //        알림에 대한 정보 설정.
         val notiBuilder = NotificationCompat.Builder(context, PRIMARY_CHANNEL_ID)
             .setSmallIcon(R.mipmap.ic_launcher) // mipmap이 아니면 일부 폰에서 앱이 죽음. 모양을 바꾸려면 투명 배경 활용.
-            .setContentTitle("테스트알람")
-            .setContentText("알람이 울립니다.")  // 메세지 개념으로 생각.
+            .setContentTitle("약속준비알람")
+            .setContentText("이제 나갈 준비를 해야합니다.")  // 메세지 개념으로 생각.
             .setContentIntent(pendingIntent)  //  대기 Intent사용 => 그 안에 contentIntent도 같이 첨부
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)
-            .setDefaults(NotificationCompat.DEFAULT_ALL)  // 기본세틴  -> 알림소리, 지녿ㅇ패턴 등 커스터마이징 가능.
+            .setDefaults(NotificationCompat.DEFAULT_ALL)  // 기본세팅  -> 알림소리, 진동패턴 등 커스터마이징 가능.
 
 //        만들어진 정보를 종합해서 실제로 알림발생
         mNotificationManager.notify(ALARM_ID,notiBuilder.build())
