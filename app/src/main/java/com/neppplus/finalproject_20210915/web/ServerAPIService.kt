@@ -96,4 +96,13 @@ interface ServerAPIService {
     fun putRequestSendOkOrNoFriend(
         @Field("user_id") userId: Int, @Field("type") type: String) : Call<BasicResponse>
 
+    @FormUrlEncoded
+    @POST("/appointment/arrival")
+    fun postRequestArrival(
+        @Field("appointment_id") id: Int,
+        @Field("lattitude") let: Double,
+        @Field("longitude") lng: Double ) : Call<BasicResponse>
+
+
+
 }
