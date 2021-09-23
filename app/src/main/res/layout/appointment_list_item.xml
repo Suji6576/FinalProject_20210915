@@ -50,7 +50,7 @@
             android:layout_height="40dp"
             android:layout_marginLeft="5dp"
             android:padding="5dp"
-            android:src="@drawable/yellow_marker" />
+            android:src="@drawable/blue_marker" />
 
     </LinearLayout>
 
