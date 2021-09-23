@@ -42,6 +42,9 @@ class MyJobService : JobService() {
         val now = Calendar.getInstance()
         val triggerTime = SystemClock.elapsedRealtime() + 30 * 1000
 
+//        실제 알람 시간 : 교통 소요시간(API), 내 준비시간 고려.
+
+
 //        실제 알람기능 설정
         alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerTime, pendingIntent)
 
