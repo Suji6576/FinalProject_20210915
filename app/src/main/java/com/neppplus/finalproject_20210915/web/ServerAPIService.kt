@@ -100,8 +100,13 @@ interface ServerAPIService {
     @POST("/appointment/arrival")
     fun postRequestArrival(
         @Field("appointment_id") id: Int,
-        @Field("lattitude") let: Double,
+        @Field("latitude") let: Double,
         @Field("longitude") lng: Double ) : Call<BasicResponse>
+
+    @GET("/appointment/{appointment_id}")
+    fun getRequestAppointmentDetail(
+        @Path("appointment_id") id: Int
+    ) : Call<BasicResponse>
 
 
 

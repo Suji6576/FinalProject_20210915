@@ -127,7 +127,6 @@ class ViewAppointmentDetailActivity : BaseActivity() {
                                             }
                                             else{
 //                                                서버가 알려주는 인증 실패 사유 출력
-    
                                                 val jsonObject = JSONObject( response.errorBody()!!.string( ))
                                                 Log.d("응답전문", jsonObject.toString())
                                                 
@@ -226,40 +225,57 @@ class ViewAppointmentDetailActivity : BaseActivity() {
 
 //        친구 목록등의 내용을 서버에서 새로 받자.
 
-//        받고 나서 API 응답 성공시 친구 목록 새로고침
+        apiService.getRequestAppointmentDetail(mAppointmentData.id).enqueue(object : Callback<BasicResponse> {
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
 
-        val inflater = LayoutInflater.from(mContext)
+                val basicResponse = response.body()!!
 
-        val sdf = SimpleDateFormat("H:mm 도착")
+                mAppointmentData = basicResponse.data.appointment
 
-        for (friend  in  mAppointmentData.invitedFriendList) {
+                //        받고 나서 API 응답 성공시 친구 목록 새로고침
 
-            val friendView = inflater.inflate(R.layout.invited_friends_list_item, null)
+                val inflater = LayoutInflater.from(mContext)
 
-            val friendProfileImg = friendView.findViewById<ImageView>(R.id.friendProfileImg)
-            val nicknameTxt = friendView.findViewById<TextView>(R.id.nicknameTxt)
-            val statusTxt = friendView.findViewById<TextView>(R.id.statusTxt)
+                val sdf = SimpleDateFormat("H:mm 도착")
 
-            if (friend.arrivedAt == null) {
+                for (friend  in  mAppointmentData.invitedFriendList) {
+
+                    val friendView = inflater.inflate(R.layout.invited_friends_list_item, null)
+
+                    val friendProfileImg = friendView.findViewById<ImageView>(R.id.friendProfileImg)
+                    val nicknameTxt = friendView.findViewById<TextView>(R.id.nicknameTxt)
+                    val statusTxt = friendView.findViewById<TextView>(R.id.statusTxt)
+
+                    if (friend.arrivedAt == null) {
 //                아직 도착 X
-                statusTxt.text = "도착 전"
-            }
+                        statusTxt.text = "도착 전"
+                    }
 
-            else {
+                    else {
 //                도착시간 OK
-                statusTxt.text = sdf.format(friend.arrivedAt!!)
+                        statusTxt.text = sdf.format(friend.arrivedAt!!)
+
+                    }
+
+
+                    Glide.with(mContext).load(friend.profileImgURL).into(friendProfileImg)
+                    nicknameTxt.text = friend.nickName
+
+
+                    binding.invitedFriendsLayout.addView(friendView)
+
+
+                }
+
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
 
             }
 
 
-            Glide.with(mContext).load(friend.profileImgURL).into(friendProfileImg)
-            nicknameTxt.text = friend.nickName
+        })
 
-
-            binding.invitedFriendsLayout.addView(friendView)
-
-
-        }
 
     }
 
