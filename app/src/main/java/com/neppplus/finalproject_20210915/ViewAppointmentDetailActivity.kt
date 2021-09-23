@@ -234,6 +234,9 @@ class ViewAppointmentDetailActivity : BaseActivity() {
 
                 //        받고 나서 API 응답 성공시 친구 목록 새로고침
 
+//                기존에 달려있는 친구목옥 View들을 전부 제거. => 그 다음에 친구목록을 다시 추가.
+                binding.invitedFriendsLayout.removeAllViews()
+
                 val inflater = LayoutInflater.from(mContext)
 
                 val sdf = SimpleDateFormat("H:mm 도착")
