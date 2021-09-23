@@ -216,6 +216,8 @@ class ViewAppointmentDetailActivity : BaseActivity() {
 
 //        5) 응용 2 - 출발지 좌표도 지도에 설정.  (setNaverMap 함수)
 
+//        6) 도착 시간 파싱
+
 
     }
 
@@ -228,6 +230,8 @@ class ViewAppointmentDetailActivity : BaseActivity() {
 
         val inflater = LayoutInflater.from(mContext)
 
+        val sdf = SimpleDateFormat("H:mm 도착")
+
         for (friend  in  mAppointmentData.invitedFriendList) {
 
             val friendView = inflater.inflate(R.layout.invited_friends_list_item, null)
@@ -236,12 +240,25 @@ class ViewAppointmentDetailActivity : BaseActivity() {
             val nicknameTxt = friendView.findViewById<TextView>(R.id.nicknameTxt)
             val statusTxt = friendView.findViewById<TextView>(R.id.statusTxt)
 
+            if (friend.arrivedAt == null) {
+//                아직 도착 X
+                statusTxt.text = "도착 전"
+            }
+
+            else {
+//                도착시간 OK
+                statusTxt.text = sdf.format(friend.arrivedAt!!)
+
+            }
+
 
             Glide.with(mContext).load(friend.profileImgURL).into(friendProfileImg)
             nicknameTxt.text = friend.nickName
 
 
             binding.invitedFriendsLayout.addView(friendView)
+
+
         }
 
     }
@@ -308,7 +325,7 @@ class ViewAppointmentDetailActivity : BaseActivity() {
 
             val infoWindow = InfoWindow()
 
-            val myODsayService = ODsayService.init(mContext, "UqivPrD/2a9zX6LAlrVto3HvYEXgv/BCT+0xVMjCVCg")
+            val myODsayService = ODsayService.init(mContext, "jmqWEkgVT5Y4JjzCMbb7GdKtIJK1HhvO0YeG/PWfKAA")
 
             myODsayService.requestSearchPubTransPath(
                 mAppointmentData.startLongitude.toString(),
