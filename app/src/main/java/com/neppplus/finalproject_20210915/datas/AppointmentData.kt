@@ -37,9 +37,10 @@ AppointmentData(
 //        현재 시간:
         val now = Calendar.getInstance() // 현재 일시
 
-//        약속시간 - 현재시간 : 몇시간?
+//        약속시간(UTC) => 폰 설정 타임존 변환 - 현재시간 (폰설정 타임존): 몇시간?
 
-        val diff = this.datetime.time - now.timeInMillis
+        val dateTimeToTimeZone = this.datetime.time + now.timeZone.rawOffset
+        val diff = dateTimeToTimeZone - now.timeInMillis
 
 //        몇시간 차이인가?
         val diffHour = diff / 1000 / 60 / 60
@@ -58,7 +59,7 @@ AppointmentData(
         }
         else {
             val sdf = SimpleDateFormat("M/d a h:mm")
-            return sdf.format(this.datetime)
+            return sdf.format(dateTimeToTimeZone)
         }
 
 
