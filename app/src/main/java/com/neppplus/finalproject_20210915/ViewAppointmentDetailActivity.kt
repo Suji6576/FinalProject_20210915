@@ -1,6 +1,7 @@
 package com.neppplus.finalproject_20210915
 
 import android.Manifest
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.Location
 import android.location.LocationListener
@@ -13,6 +14,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.gun0912.tedpermission.PermissionListener
@@ -71,9 +73,22 @@ class ViewAppointmentDetailActivity : BaseActivity() {
                 override fun onPermissionGranted() {
 //                    실제 위치 물어보기 (안드로이드 폰에게)
 
-//                    위치관리자부터 가져오자.
                     val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
 
+                    if (ActivityCompat.checkSelfPermission(
+                            mContext,
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                        ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                            mContext,
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                        ) != PackageManager.PERMISSION_GRANTED
+                    ) {
+
+//                        권한이 하나라도 없다면 밑의 코드 실행X.
+                        return
+                    }
+
+//                    위치관리자부터 가져오자.
                     locationManager.requestLocationUpdates(
                         LocationManager.GPS_PROVIDER,
                         0L,
