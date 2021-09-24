@@ -119,7 +119,8 @@ class EditAppoinmentActivity : BaseActivity() {
             val request = Request.Builder()
                 .url(urlString)
                 .get()
-                .header("Authorization", "KakaoAK 785cb45e455d8321cc1f26cd80611ecd")
+                .header("Authorization", "KakaoAK 4f5261e76d5e8e76a87ee44a2822ba4e")
+//                    카카오 REST API 키 사용해야함.
                 .build()
 
             val client = OkHttpClient()
@@ -146,7 +147,24 @@ class EditAppoinmentActivity : BaseActivity() {
                         val lng = docu.getString("x").toDouble()
                         Log.d("위경도",  "${lat} / ${lng}")
 
-                        //                        임시 : 첫번째 장소만 파싱되면 사용할 예정.
+                        runOnUiThread {
+
+//                        UI (지도 / Edt) 에 반영
+                            binding.placeSearchEdt.setText(placeName)
+
+//                        지도 - 마커 찍기 + 카메라 이동
+
+//                        좌표를 미리 생성
+                            val findPlaceLatLng = LatLng(lat, lng)
+
+                            selectedPointMarker.position = findPlaceLatLng
+                            selectedPointMarker.map = mNaverMap
+
+                            mNaverMap?.moveCamera( CameraUpdate.scrollTo(findPlaceLatLng) )
+
+
+                        }
+
 
                         break
                     }
