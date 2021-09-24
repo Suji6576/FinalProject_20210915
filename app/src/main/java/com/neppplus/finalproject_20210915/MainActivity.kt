@@ -60,10 +60,6 @@ class MainActivity : BaseActivity() {
         changeFragment(MyAppointmentListFragment.getFrag())
         Toast.makeText(mContext, "${GlobalData.loginUser!!.nickName}님 환영합니다!", Toast.LENGTH_SHORT).show()
 
-
-//        상속받은, 액션바에 있는 프로필버튼 보여주기.
-        profileImg.visibility = View.VISIBLE
-
 //        메인화면의 화면 제목 변경
         titleTxt.text = "메인 화면"
 

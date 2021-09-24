@@ -428,13 +428,6 @@ class EditAppoinmentActivity : BaseActivity() {
         })
 
 
-//        카카오 지도 띄워보기
-
-//        val mapView = MapView(mContext)
-//
-//        binding.mapView.addView(mapView)
-
-
 //        네이버 지도 Fragment 다루기
 
         val fm = supportFragmentManager
