@@ -7,12 +7,16 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.neppplus.finalproject_20210915.adapters.AppointmentAdapter
 import com.neppplus.finalproject_20210915.adapters.AppointmentRecyclerAdapter
 import com.neppplus.finalproject_20210915.databinding.ActivityMainBinding
 import com.neppplus.finalproject_20210915.datas.AppointmentData
 import com.neppplus.finalproject_20210915.datas.BasicResponse
+import com.neppplus.finalproject_20210915.fragments.InvitedAppointmentListFragment
+import com.neppplus.finalproject_20210915.fragments.MyAppointmentListFragment
+import com.neppplus.finalproject_20210915.fragments.SettingsFragment
 import com.neppplus.finalproject_20210915.utils.GlobalData
 import retrofit2.Call
 import retrofit2.Callback
@@ -22,11 +26,6 @@ class MainActivity : BaseActivity() {
 
     lateinit var binding: ActivityMainBinding
 
-    val mAppointmentList = ArrayList<AppointmentData>()
-//    lateinit var mAdapter : AppointmentAdapter
-
-    lateinit var mRecyclerAdapter : AppointmentRecyclerAdapter
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -34,16 +33,19 @@ class MainActivity : BaseActivity() {
         setValues()
     }
 
-    override fun onResume() {
-        super.onResume()
-        getAppointmentListFromServer()
-    }
 
     override fun setupEvents() {
 
-        binding.addAppoinmentBtn.setOnClickListener {
-            val myIntent = Intent(mContext, EditAppoinmentActivity::class.java)
-            startActivity(myIntent)
+        binding.bottomNavigation.setOnItemSelectedListener {
+
+            val frag = when (it.itemId) {
+                R.id.myAppointmentsBtn -> MyAppointmentListFragment.getFrag()
+                R.id.invitedAppointmentsBtn -> InvitedAppointmentListFragment.getFrag()
+                else -> SettingsFragment.getFrag()
+            }
+            changeFragment(frag)
+
+            return@setOnItemSelectedListener true
         }
 
         profileImg.setOnClickListener {
@@ -55,17 +57,8 @@ class MainActivity : BaseActivity() {
 
     override fun setValues() {
 
+        changeFragment(MyAppointmentListFragment.getFrag())
         Toast.makeText(mContext, "${GlobalData.loginUser!!.nickName}님 환영합니다!", Toast.LENGTH_SHORT).show()
-
-//        getAppointmentListFromServer()
-
-//        mAdapter = AppointmentAdapter(mContext, R.layout.appointment_list_item, mAppointmentList)
-//        binding.appointmentListView.adapter = mAdapter
-
-        mRecyclerAdapter = AppointmentRecyclerAdapter(mContext, mAppointmentList)
-        binding.appointmentRecyclerView.adapter = mRecyclerAdapter
-
-        binding.appointmentRecyclerView.layoutManager = LinearLayoutManager(mContext)
 
 
 //        상속받은, 액션바에 있는 프로필버튼 보여주기.
@@ -76,29 +69,11 @@ class MainActivity : BaseActivity() {
 
     }
 
-    fun getAppointmentListFromServer() {
+    fun changeFragment(frag: Fragment) {
 
-        apiService.getRequestAppointmentList().enqueue(object : Callback<BasicResponse> {
-            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
-
-                val basicResponse = response.body()!!
-
-                mAppointmentList.clear()
-
-//                약속목록변수에 => 서버가 알려준 약속목록을 전부 추가.
-                mAppointmentList.addAll( basicResponse.data.appointments )
-
-//                어댑터 새로고침
-                mRecyclerAdapter.notifyDataSetChanged()
-
-            }
-
-            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
-
-            }
-
-        })
-
+        val fragTransation = supportFragmentManager.beginTransaction()
+        fragTransation.replace(R.id.fragFrameLayout, frag)
+        fragTransation.commit()
     }
 
 }

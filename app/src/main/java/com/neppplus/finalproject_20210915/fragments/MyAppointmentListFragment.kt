@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.neppplus.finalproject_20210915.R
-import com.neppplus.finalproject_20210915.databinding.FragmentInvitedAppointmentsListBinding
+import com.neppplus.finalproject_20210915.databinding.FragmentMyAppointmentsListBinding
 
 class MyAppointmentListFragment : BaseFragment() {
 
@@ -21,7 +21,7 @@ class MyAppointmentListFragment : BaseFragment() {
         }
     }
 
-    lateinit var binding: FragmentInvitedAppointmentsListBinding
+    lateinit var binding: FragmentMyAppointmentsListBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,

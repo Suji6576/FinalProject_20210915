@@ -8,14 +8,14 @@ import androidx.databinding.DataBindingUtil
 import com.neppplus.finalproject_20210915.R
 import com.neppplus.finalproject_20210915.databinding.FragmentInvitedAppointmentsListBinding
 
-class InvitmentAppointmentListFragment : BaseFragment() {
+class InvitedAppointmentListFragment : BaseFragment() {
 
     companion object{
-        private var frag : InvitmentAppointmentListFragment? = null
+        private var frag : InvitedAppointmentListFragment? = null
 
-        fun getFrag() : InvitmentAppointmentListFragment {
+        fun getFrag() : InvitedAppointmentListFragment {
             if (frag == null) {
-                frag = InvitmentAppointmentListFragment()
+                frag = InvitedAppointmentListFragment()
             }
             return frag!!
         }

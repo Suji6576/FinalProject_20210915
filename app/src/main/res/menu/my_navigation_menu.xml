@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/myAppointmentBtn"
+        android:id="@+id/myAppointmentsBtn"
         android:enabled="true"
         android:icon="@drawable/star1_icon"
         android:title="내일정"/>
     <item
-        android:id="@+id/friendsAppointmentBtn"
+        android:id="@+id/invitedAppointmentsBtn"
         android:enabled="true"
         android:icon="@drawable/star2_icon"
         android:title="친구와약속"/>
