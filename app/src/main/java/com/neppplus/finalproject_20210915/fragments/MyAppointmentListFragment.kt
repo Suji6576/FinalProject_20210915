@@ -64,7 +64,7 @@ class MyAppointmentListFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-
+        getAppointmentListFromServer()
     }
 
     fun getAppointmentListFromServer() {
