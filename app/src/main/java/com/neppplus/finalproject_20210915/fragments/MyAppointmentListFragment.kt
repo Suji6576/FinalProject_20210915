@@ -1,9 +1,11 @@
 package com.neppplus.finalproject_20210915.fragments
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.neppplus.finalproject_20210915.R
@@ -11,6 +13,7 @@ import com.neppplus.finalproject_20210915.adapters.AppointmentRecyclerAdapter
 import com.neppplus.finalproject_20210915.databinding.FragmentMyAppointmentsListBinding
 import com.neppplus.finalproject_20210915.datas.AppointmentData
 import com.neppplus.finalproject_20210915.datas.BasicResponse
+import com.neppplus.finalproject_20210915.utils.GlobalData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -50,6 +53,33 @@ class MyAppointmentListFragment : BaseFragment() {
     }
 
     override fun setUpEvents() {
+
+        binding.myAppointmentRecyclerview.setOnLongClickListener {
+
+            val alert = AlertDialog.Builder(mContext)
+            alert.setTitle("일정 삭제하기")
+            alert.setMessage("정말 삭제하시겠습니까?")
+            alert.setPositiveButton("확인", DialogInterface.OnClickListener { dialogInterface, i ->
+                apiService.deleteRequestAppointment().enqueue(object : Callback<BasicResponse>{
+                    override fun onResponse(
+                        call: Call<BasicResponse>,
+                        response: Response<BasicResponse>
+                    ) {
+
+                        getAppointmentListFromServer()
+                    }
+
+                    override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                    }
+
+                })
+            })
+            alert.setNegativeButton("취소",null)
+            alert.show()
+            return@setOnLongClickListener true
+        }
+
 
     }
 
@@ -91,4 +121,5 @@ class MyAppointmentListFragment : BaseFragment() {
         })
 
     }
+
 }

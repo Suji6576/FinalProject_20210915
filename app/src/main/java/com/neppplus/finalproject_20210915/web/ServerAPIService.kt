@@ -108,6 +108,10 @@ interface ServerAPIService {
         @Path("appointment_id") id: Int
     ) : Call<BasicResponse>
 
+    @DELETE("/appointment")
+    fun deleteRequestAppointment(
+        @Field("appointment_id") id: Int ): Call<BasicResponse>
+
 
 
 }
