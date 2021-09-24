@@ -39,6 +39,8 @@ class InvitedAppointmentRecyclerAdapter(
 
             dateTimeTxt.text = data.getFormattedDateTime()
             placeNameTxt.text = data.placeName
+//            userProfileImg
+
 
 //            이벤트 처리들
             viewPlaceMapBtn.setOnClickListener {

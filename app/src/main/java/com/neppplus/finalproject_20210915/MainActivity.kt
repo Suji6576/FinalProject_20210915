@@ -36,21 +36,25 @@ class MainActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+
         binding.bottomNavigation.setOnItemSelectedListener {
 
-            val frag = when (it.itemId) {
-                R.id.myAppointmentsBtn -> MyAppointmentListFragment.getFrag()
-                R.id.invitedAppointmentsBtn -> InvitedAppointmentListFragment.getFrag()
-                else -> SettingsFragment.getFrag()
+
+            if (it.itemId == R.id.addAppointmentBtn) {
+                val myIntent = Intent(mContext, EditAppoinmentActivity::class.java)
+                startActivity(myIntent)
             }
-            changeFragment(frag)
+            else {
+
+                val frag = when (it.itemId) {
+                    R.id.myAppointmentsBtn -> MyAppointmentListFragment.getFrag()
+                    R.id.invitedAppointmentsBtn -> InvitedAppointmentListFragment.getFrag()
+                    else -> SettingsFragment.getFrag()
+                }
+                changeFragment(frag)
+            }
 
             return@setOnItemSelectedListener true
-        }
-
-        profileImg.setOnClickListener {
-            val myIntent = Intent(mContext, MySettingActivity::class.java)
-            startActivity(myIntent)
         }
 
     }
