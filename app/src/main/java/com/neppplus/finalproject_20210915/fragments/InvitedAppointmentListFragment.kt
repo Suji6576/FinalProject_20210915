@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.neppplus.finalproject_20210915.R
-import com.neppplus.finalproject_20210915.adapters.AppointmentRecyclerAdapter
+import com.neppplus.finalproject_20210915.adapters.InvitedAppointmentRecyclerAdapter
 import com.neppplus.finalproject_20210915.databinding.FragmentInvitedAppointmentsListBinding
 import com.neppplus.finalproject_20210915.datas.AppointmentData
 import com.neppplus.finalproject_20210915.datas.BasicResponse
@@ -32,7 +32,7 @@ class InvitedAppointmentListFragment : BaseFragment() {
 
     val mAppointmentList = ArrayList<AppointmentData>()
 
-    lateinit var mRecyclerAdapter : AppointmentRecyclerAdapter
+    lateinit var mRecyclerAdapter : InvitedAppointmentRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,7 +55,7 @@ class InvitedAppointmentListFragment : BaseFragment() {
 
     override fun setValues() {
 
-        mRecyclerAdapter = AppointmentRecyclerAdapter(mContext, mAppointmentList)
+        mRecyclerAdapter = InvitedAppointmentRecyclerAdapter(mContext, mAppointmentList)
         binding.invitedAppointmentRecyclerview.adapter = mRecyclerAdapter
 
         binding.invitedAppointmentRecyclerview.layoutManager = LinearLayoutManager(mContext)

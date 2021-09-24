@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.neppplus.finalproject_20210915.R
 import com.neppplus.finalproject_20210915.ViewAppointmentDetailActivity
 import com.neppplus.finalproject_20210915.ViewMapActivity
@@ -26,11 +27,7 @@ class InvitedAppointmentRecyclerAdapter(
         val viewPlaceMapBtn = view.findViewById<ImageView>(R.id.viewPlaceMapBtn)
         val rootLayout = view.findViewById<LinearLayout>(R.id.rootLayout)
         val userProfileImg = view.findViewById<ImageView>(R.id.userProfileImg)
-        val userNicknameTxt = view.findViewById<TextView>(R.id.userNicknameTxt)
-
-
-
-
+        val userNicknametxt = view.findViewById<TextView>(R.id.userNicknameTxt)
 
         fun bind(context: Context, data: AppointmentData ) {
             titleTxt.text = data.title
@@ -39,7 +36,10 @@ class InvitedAppointmentRecyclerAdapter(
 
             dateTimeTxt.text = data.getFormattedDateTime()
             placeNameTxt.text = data.placeName
-//            userProfileImg
+
+//            약속 만든 사람 정보 표시
+            Glide.with(context).load(data.user.profileImgURL).into(userProfileImg)
+            userNicknametxt.text = data.user.nickName
 
 
 //            이벤트 처리들
