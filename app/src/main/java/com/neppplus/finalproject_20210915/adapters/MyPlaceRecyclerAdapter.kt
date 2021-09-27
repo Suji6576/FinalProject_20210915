@@ -1,6 +1,7 @@
 package com.neppplus.finalproject_20210915.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.neppplus.finalproject_20210915.R
+import com.neppplus.finalproject_20210915.ViewMyPlaceMapActivity
 import com.neppplus.finalproject_20210915.datas.PlaceData
 
 class MyPlaceRecyclerAdapter(
@@ -57,7 +59,11 @@ class MyPlaceRecyclerAdapter(
 //        이벤트 처리는 mContext 변수때문에, 이 onBindViewHolder에서 처리하자.
         holder.viewPlaceMapBtn.setOnClickListener {
 
-            Toast.makeText(mContext, "지도 버튼을 눌렀습니다.", Toast.LENGTH_SHORT).show()
+            val myIntent = Intent(mContext, ViewMyPlaceMapActivity::class.java)
+            myIntent.putExtra("place", position)
+            mContext.startActivity(myIntent)
+
+//            Toast.makeText(mContext, "지도 버튼을 눌렀습니다.", Toast.LENGTH_SHORT).show()
 
         }
 
